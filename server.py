@@ -1,7 +1,7 @@
 import socket
 from time import sleep
 
-HOST = "" # loca ip
+HOST = "" # local ip
 PORT = 80
 BUFFER = 1024*3
 
