@@ -1,5 +1,5 @@
 INFO:
-simple computer information gathere written in python
+simple computer information grabber written in python
 
 
 USAGE:
