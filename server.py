@@ -1,7 +1,7 @@
 import socket
 from time import sleep
 
-HOST = "192.168.68.104"
+HOST = "" # loca ip
 PORT = 80
 BUFFER = 1024*3
 
@@ -29,10 +29,6 @@ def main(seconds_to_try):
             
             
     
-
-
-
-
 
 
 if __name__ == "__main__":
