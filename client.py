@@ -1,3 +1,7 @@
+# poorly coded computer information grabber
+# but it works
+
+
 import mouse
 import socket
 from sys import platform, api_version, getprofile
